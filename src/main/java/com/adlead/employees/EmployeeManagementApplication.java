@@ -32,9 +32,9 @@ public class EmployeeManagementApplication {
     }
 	
 	@Bean
-	   public Docket productApi() {
+	public Docket productApi() {
 	      return new Docket(DocumentationType.SWAGGER_2).select()
-	         .apis(RequestHandlerSelectors.basePackage("com.adlead.employees")).build();
+	         .apis(RequestHandlerSelectors.basePackage("com.adlead.employees.controllers")).build();
 	   }
 	
 	@Bean

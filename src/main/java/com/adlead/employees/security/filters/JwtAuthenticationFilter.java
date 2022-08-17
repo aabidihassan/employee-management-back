@@ -48,7 +48,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             return authenticationManager.authenticate(usernamePasswordAuthenticationToken);
         }
         catch (IOException e){
-return null;
+        	return null;
         }
 
     }
@@ -63,8 +63,8 @@ return null;
         String jwtRefreshToken = JwtUtil.createRefreshToken(user, request.getRequestURL().toString());
 
         Map<String, String> idToken = new HashMap<>();
-        idToken.put("access-token", jwtAccessToken);
-        idToken.put("refrsh-token", jwtRefreshToken);
+        idToken.put("accesstoken", jwtAccessToken);
+        idToken.put("refreshtoken", jwtRefreshToken);
         response.setContentType("application/json");
         new ObjectMapper().writeValue(response.getOutputStream(), idToken);
     }

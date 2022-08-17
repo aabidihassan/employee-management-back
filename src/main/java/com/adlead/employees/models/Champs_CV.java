@@ -1,6 +1,5 @@
 package com.adlead.employees.models;
 
-import java.io.File;
 import java.util.Date;
 
 import javax.persistence.DiscriminatorColumn;
