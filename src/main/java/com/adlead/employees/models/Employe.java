@@ -90,10 +90,13 @@ public class Employe {
     private Famille famille;
     
     @OneToOne @JsonIgnoreProperties("employe")
-    private Acces acces;
+    private Employe_Creation creation;
     
     @OneToOne @JsonIgnoreProperties("employe")
     private Fonction fonction;
+    
+    @OneToMany(mappedBy = "employe") @JsonIgnoreProperties("employe")
+    private List<Employe_Edit> modifications = new ArrayList<Employe_Edit>();
     
     @OneToMany(mappedBy = "employe") @JsonIgnoreProperties("employe")
     private List<Contrat> contrats = new ArrayList<Contrat>();

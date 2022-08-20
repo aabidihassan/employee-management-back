@@ -16,16 +16,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.adlead.employees.models.Employe;
 import com.adlead.employees.services.EmployeService;
+import com.adlead.employees.services.UtilisateurService;
 
 @RestController
 @RequestMapping("api/employes")
 public class EmployeController {
 	
 	private EmployeService employeService;
+	private UtilisateurService utilisateurService;
 	
 	@Autowired
-	public EmployeController(EmployeService employeService) {
+	public EmployeController(EmployeService employeService, UtilisateurService utilisateurService) {
 		this.employeService = employeService;
+		this.utilisateurService = utilisateurService;
 	}
 	
 	@GetMapping("/")
@@ -37,7 +40,7 @@ public class EmployeController {
 	@PostMapping("/")
 	@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('SUPERUSER')")
 	public Employe save(@RequestBody Employe employe, Principal principal){
-		return this.employeService.save(employe);
+		return this.employeService.save(employe, utilisateurService.loadUserByUsername(principal.getName()));
 	}
 	
 	@DeleteMapping("/{id}")
@@ -55,7 +58,7 @@ public class EmployeController {
 	@PutMapping("/")
 	@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('SUPERUSER')")
 	public Employe modify(@RequestBody Employe employe, Principal principal){
-		return this.employeService.modify(employe);
+		return this.employeService.modify(employe, utilisateurService.loadUserByUsername(principal.getName()));
 	}
 
 }

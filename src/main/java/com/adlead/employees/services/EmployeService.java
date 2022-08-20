@@ -6,8 +6,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.adlead.employees.models.Acces;
 import com.adlead.employees.models.Employe;
+import com.adlead.employees.models.Employe_Creation;
+import com.adlead.employees.models.Employe_Edit;
+import com.adlead.employees.models.Utilisateur;
 import com.adlead.employees.repositories.EmployeRepo;
 
 @Service
@@ -26,8 +28,8 @@ public class EmployeService {
 		return this.employeRepo.findAll();
 	}
 	
-	public Employe save(Employe employe) {
-		employe.setAcces(new Acces(0, new Date(), null, employe, null));
+	public Employe save(Employe employe, Utilisateur user) {
+		employe.setCreation(new Employe_Creation(0, new Date(), employe, user));
 		return this.employeRepo.save(employe);
 	}
 	
@@ -39,7 +41,7 @@ public class EmployeService {
 		return this.employeRepo.findById(id).get();
 	}
 	
-	public Employe modify(Employe employe) {
+	public Employe modify(Employe employe, Utilisateur user) {
 		Employe emp = this.getById(employe.getId_employe());
 		emp.setNom(employe.getNom());
 		emp.setPrenom(employe.getPrenom());
@@ -51,7 +53,7 @@ public class EmployeService {
 		emp.setNaissance(employe.getNaissance());
 		emp.setMatricule(employe.getMatricule());
 		emp.setStatut(employe.getStatut());
-		emp.getAcces().setDate_modification(new Date());
+		emp.getModifications().add((new Employe_Edit(0, new Date(), emp, user)));
 		return this.employeRepo.save(emp);
 	}
 

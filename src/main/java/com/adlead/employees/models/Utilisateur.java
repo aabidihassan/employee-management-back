@@ -23,7 +23,10 @@ public class Utilisateur {
     List<AppRole> roles = new ArrayList<>();
     
     @ManyToMany @JsonIgnoreProperties("user")
-    List<Acces> acces = new ArrayList<Acces>();
+    List<Employe_Creation> employes_creation = new ArrayList<Employe_Creation>();
+    
+    @ManyToMany @JsonIgnoreProperties("user")
+    List<Employe_Edit> employes_edition = new ArrayList<Employe_Edit>();
     
     public Utilisateur(String username, String password){
     	this.username = username;
