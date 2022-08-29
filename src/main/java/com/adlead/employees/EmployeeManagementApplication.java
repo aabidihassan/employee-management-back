@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.adlead.employees.models.AppRole;
 import com.adlead.employees.models.Utilisateur;
@@ -20,6 +21,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
 @EnableSwagger2
+@CrossOrigin("*")
 public class EmployeeManagementApplication {
 
 	public static void main(String[] args) {

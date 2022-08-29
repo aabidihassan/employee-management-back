@@ -11,6 +11,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
@@ -89,7 +92,7 @@ public class Employe {
     @OneToOne @JsonIgnoreProperties("employe")
     private Famille famille;
     
-    @OneToOne @JsonIgnoreProperties("employe")
+    @OneToOne @JsonIgnoreProperties("employe") @Cascade(CascadeType.ALL)
     private Employe_Creation creation;
     
     @OneToOne @JsonIgnoreProperties("employe")

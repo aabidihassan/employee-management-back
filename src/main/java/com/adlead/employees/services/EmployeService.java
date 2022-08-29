@@ -16,12 +16,10 @@ import com.adlead.employees.repositories.EmployeRepo;
 public class EmployeService {
 	
 	private EmployeRepo employeRepo;
-	private UtilisateurService utilisateurService;
 	
 	@Autowired
 	public EmployeService(EmployeRepo employeRepo, UtilisateurService utilisateurService) {
 		this.employeRepo = employeRepo;
-		this.utilisateurService = utilisateurService;
 	}
 	
 	public List<Employe> getAll(){
@@ -35,6 +33,9 @@ public class EmployeService {
 	
 	public void delete(long id) {
 		this.employeRepo.deleteById(id);
+		Employe emp = new Employe();
+		emp.setId_employe(id);
+		this.employeRepo.delete(emp);
 	}
 	
 	public Employe getById(long id) {
