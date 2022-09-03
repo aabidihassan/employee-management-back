@@ -9,9 +9,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.adlead.employees.models.AppRole;
+import com.adlead.employees.models.Service;
 import com.adlead.employees.models.Utilisateur;
 import com.adlead.employees.services.AccountServiceImpl;
 import com.adlead.employees.services.AppRoleService;
+import com.adlead.employees.services.ServiceService;
 import com.adlead.employees.services.UtilisateurService;
 
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -40,7 +42,7 @@ public class EmployeeManagementApplication {
 	   }
 	
 	@Bean
-  CommandLineRunner start(AccountServiceImpl accountService, AppRoleService appRoleService, UtilisateurService utilisateurService){
+  CommandLineRunner start(AccountServiceImpl accountService, AppRoleService appRoleService, UtilisateurService utilisateurService, ServiceService serviceService){
       return args -> {
           appRoleService.addNewRole(new AppRole("ADMIN"));
           appRoleService.addNewRole(new AppRole("SUPERUSER"));

@@ -22,7 +22,7 @@ public class ServiceService {
 	}
 	
 	public com.adlead.employees.models.Service save(com.adlead.employees.models.Service service){
-		return this.save(service);
+		return this.serviceRepo.save(service);
 	}
 	
 	public com.adlead.employees.models.Service findById(long id){
