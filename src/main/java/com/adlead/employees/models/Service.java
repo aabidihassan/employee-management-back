@@ -34,7 +34,7 @@ public class Service {
      */
     private String nom_service;
     
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "service") @JsonIgnoreProperties("service")
-    private List<Fonction> fonctions = new ArrayList<Fonction>();
+    @OneToMany(mappedBy = "service") @JsonIgnoreProperties("service")
+    private List<Employe> employes = new ArrayList<Employe>();
 
 }

@@ -1,12 +1,13 @@
 package com.adlead.employees.models;
 
+
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -27,10 +28,7 @@ public class Fonction {
 	@Id @Column(length = 20)
     private String poste;
 	
-	@ManyToOne @JsonIgnoreProperties("fonctions")
-	private Service service;
-	
-	@OneToOne(mappedBy = "fonction") @JsonIgnoreProperties("fonction")
-	private Employe employe;
+	@OneToMany(mappedBy = "fonction") @JsonIgnoreProperties("fonction")
+	private List<Employe> employe = new ArrayList<Employe>();
 
 }

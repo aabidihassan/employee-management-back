@@ -95,8 +95,11 @@ public class Employe {
     @OneToOne @JsonIgnoreProperties("employe") @Cascade(CascadeType.ALL)
     private Employe_Creation creation;
     
-    @OneToOne @JsonIgnoreProperties("employe")
+    @ManyToOne @JsonIgnoreProperties("employe")
     private Fonction fonction;
+    
+    @ManyToOne @JsonIgnoreProperties("employes")
+    private Service service;
     
     @OneToMany(mappedBy = "employe") @JsonIgnoreProperties("employe")
     private List<Employe_Edit> modifications = new ArrayList<Employe_Edit>();
