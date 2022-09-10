@@ -1,11 +1,11 @@
 package com.adlead.employees.models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -37,10 +37,10 @@ public class Famille {
      */
     private int nb_enfants_adult;
     
+    @Column(length = 1)
+    private String situation;
+    
     @OneToOne(mappedBy = "famille", fetch = FetchType.EAGER) @JsonIgnoreProperties("famille")
     private Employe employe;
-    
-    @ManyToOne @JsonIgnoreProperties("familles")
-    private Situation_famille situation_famille;
 
 }

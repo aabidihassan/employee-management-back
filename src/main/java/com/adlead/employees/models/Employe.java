@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -86,10 +87,10 @@ public class Employe {
     @ManyToOne @JsonIgnoreProperties("employes")
     private Statut statut;
     
-    @OneToOne @JsonIgnoreProperties("employes")
+    @OneToOne @JsonIgnoreProperties("employes") @Cascade(CascadeType.ALL)
     private Detail_RH detailsRH;
     
-    @OneToOne @JsonIgnoreProperties("employe")
+    @OneToOne @JsonIgnoreProperties("employe") @Cascade(CascadeType.ALL)
     private Famille famille;
     
     @OneToOne @JsonIgnoreProperties("employe") @Cascade(CascadeType.ALL)
@@ -102,6 +103,7 @@ public class Employe {
     private Service service;
     
     @OneToMany(mappedBy = "employe") @JsonIgnoreProperties("employe")
+    @Cascade(CascadeType.ALL)
     private List<Employe_Edit> modifications = new ArrayList<Employe_Edit>();
     
     @OneToMany(mappedBy = "employe") @JsonIgnoreProperties("employe")

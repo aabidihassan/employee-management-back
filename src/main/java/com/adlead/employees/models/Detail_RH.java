@@ -32,22 +32,27 @@ public class Detail_RH {
     /**
      * 
      */
-    private Date date_embauche;
+    private String date_embauche;
 
     /**
      * 
      */
-    private String num_cncc;
+    private String num_cnss;
 
     /**
      * 
      */
-    private long rip;
+    private String rip;
+    
+    private String type_contrat;
+    
+    private String banque;
     
     @OneToOne(mappedBy = "detailsRH", fetch = FetchType.EAGER) @JsonIgnoreProperties("detailsRH")
     private Employe employe;
     
-    @ManyToOne @JsonIgnoreProperties("detailsRH")
-    private Mode_Paiment mode_paiment;
+    private String mode_paiment;
+    
+    private boolean recruteur;
 
 }

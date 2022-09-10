@@ -54,6 +54,8 @@ public class EmployeService {
 		emp.setNaissance(employe.getNaissance());
 		emp.setMatricule(employe.getMatricule());
 		emp.setStatut(employe.getStatut());
+		emp.setFamille(employe.getFamille());
+		emp.setDetailsRH(employe.getDetailsRH());
 		emp.getModifications().add((new Employe_Edit(0, new Date(), emp, user)));
 		return this.employeRepo.save(emp);
 	}
