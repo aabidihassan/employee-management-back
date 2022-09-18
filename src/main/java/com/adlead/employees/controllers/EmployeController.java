@@ -21,7 +21,7 @@ import com.adlead.employees.services.UtilisateurService;
 
 @RestController
 @RequestMapping("api/employes")
-@CrossOrigin("*")
+@CrossOrigin(origins = "*")
 public class EmployeController {
 	
 	private EmployeService employeService;

@@ -15,6 +15,7 @@ import javax.persistence.OneToOne;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
@@ -85,9 +86,10 @@ public class Employe {
     private String adresse;
     
     @ManyToOne @JsonIgnoreProperties("employes")
+    @Cascade(CascadeType.ALL)
     private Statut statut;
     
-    @OneToOne @JsonIgnoreProperties("employes") @Cascade(CascadeType.ALL)
+    @OneToOne @JsonIgnoreProperties("employe") @Cascade(CascadeType.ALL)
     private Detail_RH detailsRH;
     
     @OneToOne @JsonIgnoreProperties("employe") @Cascade(CascadeType.ALL)
@@ -102,9 +104,13 @@ public class Employe {
     @ManyToOne @JsonIgnoreProperties("employes")
     private Service service;
     
-    @OneToMany(mappedBy = "employe") @JsonIgnoreProperties("employe")
+    @OneToOne(fetch = FetchType.EAGER) @JsonIgnore
     @Cascade(CascadeType.ALL)
-    private List<Employe_Edit> modifications = new ArrayList<Employe_Edit>();
+    private Utilisateur user;
+    
+    @OneToOne(mappedBy = "employe") @JsonIgnoreProperties("employe")
+    @Cascade(CascadeType.ALL)
+    private Employe_Edit modification;
     
     @OneToMany(mappedBy = "employe") @JsonIgnoreProperties("employe")
     private List<Contrat> contrats = new ArrayList<Contrat>();

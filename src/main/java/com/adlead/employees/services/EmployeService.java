@@ -4,8 +4,10 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.adlead.employees.models.AppRole;
 import com.adlead.employees.models.Employe;
 import com.adlead.employees.models.Employe_Creation;
 import com.adlead.employees.models.Employe_Edit;
@@ -16,10 +18,14 @@ import com.adlead.employees.repositories.EmployeRepo;
 public class EmployeService {
 	
 	private EmployeRepo employeRepo;
+	private EmailSenderService emailSenderService;
+	private PasswordEncoder passwordEncoder;
 	
 	@Autowired
-	public EmployeService(EmployeRepo employeRepo, UtilisateurService utilisateurService) {
+	public EmployeService(EmployeRepo employeRepo, EmailSenderService emailSenderService, PasswordEncoder passwordEncoder) {
 		this.employeRepo = employeRepo;
+		this.emailSenderService = emailSenderService;
+		this.passwordEncoder = passwordEncoder;
 	}
 	
 	public List<Employe> getAll(){
@@ -42,7 +48,37 @@ public class EmployeService {
 		return this.employeRepo.findById(id).get();
 	}
 	
+	public void sendEmail(Employe employe, Utilisateur user) {
+    	this.emailSenderService.sendEmail(employe.getEmail(), "Votre Compte", 
+    			"Bonjour "+employe.getNom()+ " " + employe.getPrenom() +
+    			", \nVotre compte pour la plateforme de gestion des employes est bien cree. "
+    			+ "\nVous pouvez authentifier en utilisant: \nNom d'utilisateur : "
+    					+ user.getUsername() + "\nMot de passe : "+user.getPassword()
+    					+ "\nBonne reception.");
+    }
+	
+	public String generatePassword() {
+		String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+		         + "0123456789"
+		         + "abcdefghijklmnopqrstuvxyz";
+		StringBuilder sb = new StringBuilder(8);
+		for (int i = 0; i < 8; i++) {
+			 
+			   // generate a random number between
+			   // 0 to AlphaNumericString variable length
+			   int index
+			    = (int)(AlphaNumericString.length()
+			      * Math.random());
+			 
+			   // add Character one by one in end of sb
+			   sb.append(AlphaNumericString
+			      .charAt(index));
+			  }
+		return sb.toString();
+	}
+	
 	public Employe modify(Employe employe, Utilisateur user) {
+		System.out.println("Hollaaaaaaaaaaaa edit");
 		Employe emp = this.getById(employe.getId_employe());
 		emp.setNom(employe.getNom());
 		emp.setPrenom(employe.getPrenom());
@@ -55,8 +91,21 @@ public class EmployeService {
 		emp.setMatricule(employe.getMatricule());
 		emp.setStatut(employe.getStatut());
 		emp.setFamille(employe.getFamille());
+		if(emp.getDetailsRH() == null && employe.getDetailsRH() != null) {
+			if(employe.getDetailsRH().isRecruteur()) {
+				Utilisateur account = new Utilisateur();
+				account.setUsername(employe.getNom() + "." + employe.getPrenom());
+				account.setPassword(this.generatePassword());
+				account.getRoles().add(new AppRole("USER", null));
+				this.sendEmail(emp, account);
+				account.setPassword(this.passwordEncoder.encode(account.getPassword()));
+				emp.setUser(account);
+			}
+		}
 		emp.setDetailsRH(employe.getDetailsRH());
-		emp.getModifications().add((new Employe_Edit(0, new Date(), emp, user)));
+		if(emp.getModification() == null) emp.setModification(new Employe_Edit());
+		emp.getModification().setDate_modification(new Date());
+		emp.getModification().setUser(user);
 		return this.employeRepo.save(emp);
 	}
 
