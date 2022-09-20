@@ -35,6 +35,6 @@ public class Service {
     private String nom_service;
     
     @OneToMany(mappedBy = "service") @JsonIgnoreProperties("service")
-    private List<Employe> employes = new ArrayList<Employe>();
+    private List<Fonction> fonctions = new ArrayList<Fonction>();
 
 }

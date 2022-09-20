@@ -90,6 +90,7 @@ public class EmployeService {
 		emp.setNaissance(employe.getNaissance());
 		emp.setMatricule(employe.getMatricule());
 		emp.setStatut(employe.getStatut());
+		emp.setFonction(employe.getFonction());
 		emp.setFamille(employe.getFamille());
 		if(emp.getDetailsRH() == null && employe.getDetailsRH() != null) {
 			if(employe.getDetailsRH().isRecruteur()) {

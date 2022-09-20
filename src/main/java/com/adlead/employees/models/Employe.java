@@ -98,11 +98,8 @@ public class Employe {
     @OneToOne @JsonIgnoreProperties("employe") @Cascade(CascadeType.ALL)
     private Employe_Creation creation;
     
-    @ManyToOne @JsonIgnoreProperties("employe")
-    private Fonction fonction;
-    
     @ManyToOne @JsonIgnoreProperties("employes")
-    private Service service;
+    private Fonction fonction;
     
     @OneToOne(fetch = FetchType.EAGER) @JsonIgnore
     @Cascade(CascadeType.ALL)
