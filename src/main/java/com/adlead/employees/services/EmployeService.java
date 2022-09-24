@@ -78,7 +78,6 @@ public class EmployeService {
 	}
 	
 	public Employe modify(Employe employe, Utilisateur user) {
-		System.out.println("Hollaaaaaaaaaaaa edit");
 		Employe emp = this.getById(employe.getId_employe());
 		emp.setNom(employe.getNom());
 		emp.setPrenom(employe.getPrenom());
@@ -104,6 +103,10 @@ public class EmployeService {
 			}
 		}
 		emp.setDetailsRH(employe.getDetailsRH());
+		return this.setModification(emp, user);
+	}
+	
+	public Employe setModification(Employe emp, Utilisateur user) {
 		if(emp.getModification() == null) emp.setModification(new Employe_Edit());
 		emp.getModification().setDate_modification(new Date());
 		emp.getModification().setUser(user);

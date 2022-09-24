@@ -41,19 +41,19 @@ public class EmployeeManagementApplication {
 	         .apis(RequestHandlerSelectors.basePackage("com.adlead.employees.controllers")).build();
 	   }
 	
-	@Bean
-  CommandLineRunner start(AccountServiceImpl accountService, AppRoleService appRoleService, UtilisateurService utilisateurService, ServiceService serviceService){
-      return args -> {
-          appRoleService.addNewRole(new AppRole("ADMIN"));
-          appRoleService.addNewRole(new AppRole("SUPERUSER"));
-          appRoleService.addNewRole(new AppRole("USER"));
-          utilisateurService.addNewUser(new Utilisateur("admin", "admin"));
-          utilisateurService.addNewUser(new Utilisateur("super", "super"));
-          utilisateurService.addNewUser(new Utilisateur("user", "user"));
-          accountService.affectRoleToUser("admin", "ADMIN");
-          accountService.affectRoleToUser("super", "SUPERUSER");
-          accountService.affectRoleToUser("user", "USER");
-      };
-  }
+//	@Bean
+//  CommandLineRunner start(AccountServiceImpl accountService, AppRoleService appRoleService, UtilisateurService utilisateurService, ServiceService serviceService){
+//      return args -> {
+//          appRoleService.addNewRole(new AppRole("ADMIN"));
+//          appRoleService.addNewRole(new AppRole("SUPERUSER"));
+//          appRoleService.addNewRole(new AppRole("USER"));
+//          utilisateurService.addNewUser(new Utilisateur("admin", "admin"));
+//          utilisateurService.addNewUser(new Utilisateur("super", "super"));
+//          utilisateurService.addNewUser(new Utilisateur("user", "user"));
+//          accountService.affectRoleToUser("admin", "ADMIN");
+//          accountService.affectRoleToUser("super", "SUPERUSER");
+//          accountService.affectRoleToUser("user", "USER");
+//      };
+//  }
 
 }

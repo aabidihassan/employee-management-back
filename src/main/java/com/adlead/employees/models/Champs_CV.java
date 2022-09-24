@@ -1,7 +1,5 @@
 package com.adlead.employees.models;
 
-import java.util.Date;
-
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -35,12 +33,12 @@ public class Champs_CV {
     /**
      * 
      */
-    private Date date_debut;
+    private String date_debut;
 
     /**
      * 
      */
-    private Date date_fin;
+    private String date_fin;
 
     /**
      * 

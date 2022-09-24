@@ -119,6 +119,7 @@ public class Employe {
     private List<Document> documents = new ArrayList<Document>();
     
     @OneToMany(mappedBy = "employe") @JsonIgnoreProperties("employe")
+    @Cascade(CascadeType.ALL)
     private List<Champs_CV> champs = new ArrayList<Champs_CV>();
 
 }
