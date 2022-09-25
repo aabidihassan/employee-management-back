@@ -28,5 +28,15 @@ public class ServiceService {
 	public com.adlead.employees.models.Service findById(long id){
 		return this.serviceRepo.findById(id).get();
 	}
+	
+	public void delete(long id) {
+		this.serviceRepo.deleteById(id);
+	}
+	
+	public com.adlead.employees.models.Service edit(com.adlead.employees.models.Service service){
+		com.adlead.employees.models.Service old = this.findById(service.getId_service());
+		old.setNom_service(service.getNom_service());
+		return this.serviceRepo.save(old);
+	}
 
 }

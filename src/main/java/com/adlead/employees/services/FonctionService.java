@@ -25,5 +25,19 @@ public class FonctionService {
 	public Fonction save(Fonction fonction) {
 		return this.fonctionRepo.save(fonction);
 	}
+	
+	public void delete(long id) {
+		this.fonctionRepo.deleteById(id);
+	}
+	
+	public Fonction findById(long id) {
+		return this.fonctionRepo.findById(id).get();
+	}
+	
+	public Fonction edit(Fonction fonction) {
+		Fonction old = this.findById(fonction.getId_fonction());
+		old.setPoste(fonction.getPoste());
+		return this.fonctionRepo.save(old);
+	}
 
 }

@@ -94,7 +94,8 @@ public class EmployeService {
 		if(emp.getDetailsRH() == null && employe.getDetailsRH() != null) {
 			if(employe.getDetailsRH().isRecruteur()) {
 				Utilisateur account = new Utilisateur();
-				account.setUsername(employe.getNom() + "." + employe.getPrenom());
+				account.setUsername(employe.getPrenom().charAt(0) + "." + employe.getNom());
+				account.setUsername(account.getUsername().toLowerCase());
 				account.setPassword(this.generatePassword());
 				account.getRoles().add(new AppRole("USER", null));
 				this.sendEmail(emp, account);
