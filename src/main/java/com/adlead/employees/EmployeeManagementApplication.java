@@ -1,5 +1,7 @@
 package com.adlead.employees;
 
+import java.util.Date;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,7 +11,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.adlead.employees.models.AppRole;
+import com.adlead.employees.models.Employe;
+import com.adlead.employees.models.Employe_Creation;
 import com.adlead.employees.models.Service;
+import com.adlead.employees.models.Statut;
 import com.adlead.employees.models.Utilisateur;
 import com.adlead.employees.services.AccountServiceImpl;
 import com.adlead.employees.services.AppRoleService;
@@ -47,12 +52,18 @@ public class EmployeeManagementApplication {
 //          appRoleService.addNewRole(new AppRole("ADMIN"));
 //          appRoleService.addNewRole(new AppRole("SUPERUSER"));
 //          appRoleService.addNewRole(new AppRole("USER"));
-//          utilisateurService.addNewUser(new Utilisateur("admin", "admin"));
-//          utilisateurService.addNewUser(new Utilisateur("super", "super"));
-//          utilisateurService.addNewUser(new Utilisateur("user", "user"));
+//          Utilisateur user1 = new Utilisateur();
+//          user1.setId_user(0);
+//          user1.setUsername("admin");
+//          user1.setPassword("admin");
+//          user1.setEmploye(new Employe(0, "Admin", "Admin", "aabidihassan2@gmail.com", "0637842698",
+//        		  "M", "23/10/2000", "Photo url", "EE869060", "emp0001", true, "455 izdihar 2 Marrakech", new Statut("Actif", null), null, null, null, null, null, null, null, null, null, null));
+//          utilisateurService.addNewUser(user1);
+////          utilisateurService.addNewUser(new Utilisateur("super", "super"));
+////          utilisateurService.addNewUser(new Utilisateur("user", "user"));
 //          accountService.affectRoleToUser("admin", "ADMIN");
-//          accountService.affectRoleToUser("super", "SUPERUSER");
-//          accountService.affectRoleToUser("user", "USER");
+////          accountService.affectRoleToUser("super", "SUPERUSER");
+////          accountService.affectRoleToUser("user", "USER");
 //      };
 //  }
 

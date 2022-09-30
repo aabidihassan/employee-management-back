@@ -44,17 +44,17 @@ public class EmployeController {
 		return this.employeService.save(employe, utilisateurService.loadUserByUsername(principal.getName()));
 	}
 	
-	@DeleteMapping("/{id}")
+	@GetMapping("/{id}")
 	@PreAuthorize("hasAuthority('ADMIN')")
 	public void delete(@PathVariable(name = "id") long id) {
 		this.employeService.delete(id);
 	}
 	
-	@GetMapping("/{id}")
-	@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('SUPERUSER')")
-	public Employe getById(@PathVariable(name = "id") long id){
-		return this.employeService.getById(id);
-	}
+//	@GetMapping("/{id}")
+//	@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('SUPERUSER')")
+//	public Employe getById(@PathVariable(name = "id") long id){
+//		return this.employeService.getById(id);
+//	}
 	
 	@PostMapping("/edit")
 	@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('SUPERUSER')")

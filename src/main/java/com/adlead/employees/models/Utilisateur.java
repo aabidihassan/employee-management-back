@@ -17,8 +17,11 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -26,7 +29,9 @@ import javax.persistence.OneToOne;
 public class Utilisateur {
 
     @Id
-    @Column(length = 30)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id_user;
+    
     private String username;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
@@ -34,13 +39,14 @@ public class Utilisateur {
     @Cascade(CascadeType.ALL)
     List<AppRole> roles = new ArrayList<>();
     
-    @ManyToMany @JsonIgnoreProperties("user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER) @JsonIgnore
     List<Employe_Creation> employes_creation = new ArrayList<Employe_Creation>();
     
     @ManyToMany @JsonIgnoreProperties("user")
     List<Employe_Edit> employes_edition = new ArrayList<Employe_Edit>();
     
     @OneToOne(mappedBy = "user", fetch = FetchType.EAGER) @JsonIgnore
+    @Cascade(CascadeType.ALL)
     private Employe employe;
     
     

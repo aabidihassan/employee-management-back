@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.adlead.employees.models.Utilisateur;
 
 @Repository
-public interface UtilisateurRepo extends JpaRepository<Utilisateur, String> {
+public interface UtilisateurRepo extends JpaRepository<Utilisateur, Long> {
 
     Utilisateur findByUsername(String username);
 

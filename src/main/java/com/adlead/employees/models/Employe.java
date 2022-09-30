@@ -14,6 +14,7 @@ import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
+import org.springframework.beans.factory.annotation.Value;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -79,6 +80,9 @@ public class Employe {
      * 
      */
     private String matricule;
+    
+    
+    private boolean active;
 
     /**
      * 
@@ -101,7 +105,7 @@ public class Employe {
     @ManyToOne @JsonIgnoreProperties("employes")
     private Fonction fonction;
     
-    @OneToOne(fetch = FetchType.EAGER) @JsonIgnore
+    @OneToOne(fetch = FetchType.EAGER) @JsonIgnoreProperties("employe")
     @Cascade(CascadeType.ALL)
     private Utilisateur user;
     

@@ -30,6 +30,8 @@ public class Document {
      */
     private String fichier;
     
+    private String description;
+    
     @ManyToOne @JsonIgnoreProperties("documents")
     private Employe employe;
 

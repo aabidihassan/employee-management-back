@@ -28,7 +28,7 @@ public class Employe_Creation {
 	@OneToOne(fetch = FetchType.EAGER, mappedBy = "creation") @JsonIgnoreProperties("creation")
     private Employe employe;
     
-    @ManyToOne @JsonIgnoreProperties("employes_creation")
+    @ManyToOne(fetch = FetchType.EAGER) @JsonIgnoreProperties("employes_creation")
     private Utilisateur user;
 
 }

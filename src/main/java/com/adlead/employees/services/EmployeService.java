@@ -29,19 +29,19 @@ public class EmployeService {
 	}
 	
 	public List<Employe> getAll(){
-		return this.employeRepo.findAll();
+		return this.employeRepo.findAllEmployesByActive(true);
 	}
 	
 	public Employe save(Employe employe, Utilisateur user) {
 		employe.setCreation(new Employe_Creation(0, new Date(), employe, user));
+		employe.setActive(true);
 		return this.employeRepo.save(employe);
 	}
 	
 	public void delete(long id) {
-		this.employeRepo.deleteById(id);
-		Employe emp = new Employe();
-		emp.setId_employe(id);
-		this.employeRepo.delete(emp);
+		Employe emp = this.getById(id);
+		emp.setActive(false);
+		this.employeRepo.save(emp);
 	}
 	
 	public Employe getById(long id) {
