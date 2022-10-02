@@ -70,7 +70,7 @@ public class DocumentService {
 	
 	public void delete(long id) {
 		Document doc = this.getById(id);
-		File file = new File(DIRECTORY+ doc.getEmploye().getId_employe() + "/" + doc.getFichier());
+		File file = new File(DIRECTORY+ doc.getFichier());
 		file.delete();
 		this.documentRepo.deleteById(id);
 		

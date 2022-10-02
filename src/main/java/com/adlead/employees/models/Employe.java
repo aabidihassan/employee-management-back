@@ -99,7 +99,7 @@ public class Employe {
     @OneToOne @JsonIgnoreProperties("employe") @Cascade(CascadeType.ALL)
     private Famille famille;
     
-    @OneToOne @JsonIgnoreProperties("employe") @Cascade(CascadeType.ALL)
+    @OneToOne @JsonIgnore @Cascade(CascadeType.ALL)
     private Employe_Creation creation;
     
     @ManyToOne @JsonIgnoreProperties("employes")

@@ -59,7 +59,6 @@ public class EmployeController {
 	@PostMapping("/edit")
 	@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('SUPERUSER')")
 	public Employe modify(@RequestBody Employe employe, Principal principal){
-		System.out.println("Hiiiiii updaaaaate");
 		return this.employeService.modify(employe, utilisateurService.loadUserByUsername(principal.getName()));
 	}
 

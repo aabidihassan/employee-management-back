@@ -39,14 +39,13 @@ public class Utilisateur {
     @Cascade(CascadeType.ALL)
     List<AppRole> roles = new ArrayList<>();
     
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER) @JsonIgnore
+    @OneToMany(mappedBy = "user") @JsonIgnore
     List<Employe_Creation> employes_creation = new ArrayList<Employe_Creation>();
     
-    @ManyToMany @JsonIgnoreProperties("user")
+    @OneToMany(mappedBy = "user") @JsonIgnore
     List<Employe_Edit> employes_edition = new ArrayList<Employe_Edit>();
     
     @OneToOne(mappedBy = "user", fetch = FetchType.EAGER) @JsonIgnore
-    @Cascade(CascadeType.ALL)
     private Employe employe;
     
     
