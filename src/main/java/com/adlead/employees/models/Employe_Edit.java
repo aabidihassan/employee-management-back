@@ -3,6 +3,7 @@ package com.adlead.employees.models;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -31,7 +32,7 @@ public class Employe_Edit {
 	@OneToOne @JsonIgnore
     private Employe employe;
     
-    @ManyToOne @JsonIgnoreProperties("user")
+    @ManyToOne(fetch = FetchType.EAGER) @JsonIgnoreProperties("employes_edition")
     private Utilisateur user;
 
 }

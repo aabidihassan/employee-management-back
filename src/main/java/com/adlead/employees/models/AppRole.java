@@ -1,7 +1,6 @@
 package com.adlead.employees.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,7 +23,7 @@ public class AppRole {
     private String libelle;
     
     @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
-     @JsonIgnore
+    @JsonIgnore
     private List<Utilisateur> users = new ArrayList<>();
 
     public AppRole(String libelle){

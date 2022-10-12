@@ -103,10 +103,13 @@ public class EmployeService {
 				emp.setUser(account);
 			}
 		}
-		emp.getUser().setUsername(employe.getUser().getUsername());
-		emp.getUser().setRoles(employe.getUser().getRoles());
-		if(employe.getUser().getPassword()!=null)
-		emp.getUser().setPassword(this.passwordEncoder.encode(employe.getUser().getPassword()));
+		if(employe.getUser()!=null) {
+			emp.getUser().setUsername(employe.getUser().getUsername());
+			emp.getUser().setRoles(employe.getUser().getRoles());
+			if(employe.getUser().getPassword()!=null)
+			emp.getUser().setPassword(this.passwordEncoder.encode(employe.getUser().getPassword()));
+		}
+		
 		emp.setDetailsRH(employe.getDetailsRH());
 		return this.setModification(emp, user);
 	}

@@ -99,8 +99,8 @@ public class Employe {
     @OneToOne @JsonIgnoreProperties("employe") @Cascade(CascadeType.ALL)
     private Famille famille;
     
-    @OneToOne @JsonIgnore @Cascade(CascadeType.ALL)
-    private Employe_Creation creation;
+    @OneToOne @JsonIgnoreProperties("employe") @Cascade(CascadeType.ALL)
+    private Employe_Creation creation = new Employe_Creation();
     
     @ManyToOne @JsonIgnoreProperties("employes")
     private Fonction fonction;
@@ -111,7 +111,7 @@ public class Employe {
     
     @OneToOne(mappedBy = "employe") @JsonIgnoreProperties("employe")
     @Cascade(CascadeType.ALL)
-    private Employe_Edit modification;
+    private Employe_Edit modification = new Employe_Edit();
     
     @OneToMany(mappedBy = "employe") @JsonIgnoreProperties("employe")
     private List<Contrat> contrats = new ArrayList<Contrat>();

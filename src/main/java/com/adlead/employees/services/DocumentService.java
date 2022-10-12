@@ -44,7 +44,6 @@ public class DocumentService {
 		File directory = new File(DIRECTORY + emp.getId_employe() + "/");
 		if (! directory.exists()) directory.mkdir();
 		Path filestorage = Paths.get(DIRECTORY + emp.getId_employe() + "/", filename).toAbsolutePath().normalize();
-		System.out.println(filestorage.toString());
 		Files.copy(file.getInputStream(), filestorage);
 		Document document = new Document();
 		document.setFichier(emp.getId_employe() + "/" + filename);
