@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.adlead.employees.dto.EmployeDto;
 import com.adlead.employees.models.AppRole;
 import com.adlead.employees.models.Employe;
 import com.adlead.employees.models.Employe_Creation;
