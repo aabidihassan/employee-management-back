@@ -1,18 +1,27 @@
 package com.adlead.employees.services;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.adlead.employees.dto.EmployeDto;
 import com.adlead.employees.models.AppRole;
 import com.adlead.employees.models.Employe;
 import com.adlead.employees.models.Employe_Creation;
 import com.adlead.employees.models.Employe_Edit;
 import com.adlead.employees.models.Utilisateur;
 import com.adlead.employees.repositories.EmployeRepo;
+import com.google.gson.Gson;
 
 @Service
 public class EmployeService {
@@ -20,6 +29,7 @@ public class EmployeService {
 	private EmployeRepo employeRepo;
 	private EmailSenderService emailSenderService;
 	private PasswordEncoder passwordEncoder;
+	public static final String DIRECTORY = "src/main/resources/templates/files/";
 	
 	@Autowired
 	public EmployeService(EmployeRepo employeRepo, EmailSenderService emailSenderService, PasswordEncoder passwordEncoder) {
@@ -32,9 +42,17 @@ public class EmployeService {
 		return this.employeRepo.findAllEmployesByActive(true);
 	}
 	
-	public Employe save(Employe employe, Utilisateur user) {
+	public Employe save(String emp, MultipartFile photo, Utilisateur user) throws IOException {
+		Employe employe = new Gson().fromJson(emp, Employe.class);
 		employe.setCreation(new Employe_Creation(0, new Date(), employe, user));
 		employe.setActive(true);
+		employe = this.employeRepo.save(employe);
+		String filename = StringUtils.cleanPath(photo.getOriginalFilename());
+		File directory = new File(DIRECTORY + employe.getId_employe() + "/");
+		if (! directory.exists()) directory.mkdir();
+		Path filestorage = Paths.get(DIRECTORY + employe.getId_employe() + "/", filename).toAbsolutePath().normalize();
+		Files.copy(photo.getInputStream(), filestorage);
+		employe.setPhoto(employe.getId_employe() + "/" + filename);
 		return this.employeRepo.save(employe);
 	}
 	
