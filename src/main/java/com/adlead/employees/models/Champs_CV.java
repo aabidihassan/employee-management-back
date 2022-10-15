@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -49,6 +50,9 @@ public class Champs_CV {
      * 
      */
     private String attestation;
+    
+    @OneToOne
+    private Document document;
     
     @ManyToOne @JsonIgnoreProperties("champs")
     private Employe employe;
