@@ -15,9 +15,9 @@ import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
-import org.springframework.beans.factory.annotation.Value;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
@@ -120,8 +120,9 @@ public class Employe {
     @OneToMany(mappedBy = "employe") @JsonIgnoreProperties("employe")
     private List<Contrat> contrats = new ArrayList<Contrat>();
     
-    @OneToMany(mappedBy = "employe") @JsonIgnoreProperties("employe")
-    private List<Demande_Conge> demandes = new ArrayList<Demande_Conge>();
+    @OneToMany(mappedBy = "employe", fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SUBSELECT)
+    private List<Conge> conges = new ArrayList<Conge>();
     
     @OneToMany(mappedBy = "employe") @JsonIgnoreProperties("employe")
     private List<Document> documents = new ArrayList<Document>();

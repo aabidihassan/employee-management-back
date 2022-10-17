@@ -1,7 +1,5 @@
 package com.adlead.employees.models;
 
-import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -30,20 +28,19 @@ public class Demande_Conge {
     /**
      * 
      */
-    private Date date_debut;
+    private String date_debut;
 
     /**
      * 
      */
-    private Date date_fin;
+    private String date_fin;
+    
+    private int nb_jour;
     
     @ManyToOne @JsonIgnoreProperties("demandes")
     private Conge conge;
     
     @ManyToOne @JsonIgnoreProperties("demandes")
     private Etat_Conge etat;
-    
-    @ManyToOne @JsonIgnoreProperties("demandes")
-    private Employe employe;
 
 }

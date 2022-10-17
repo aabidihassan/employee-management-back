@@ -5,10 +5,12 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -26,15 +28,19 @@ public class Conge {
     /**
      * 
      */
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id_conge;
+	@Id
+	private int annee;
 
     /**
      * 
      */
     private int nb_jours;
     
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "conge") @JsonIgnoreProperties("conge")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "conge")
+    @Fetch(FetchMode.SUBSELECT)
     private List<Demande_Conge> demandes = new ArrayList<Demande_Conge>();
+    
+    @ManyToOne(fetch = FetchType.EAGER) @JsonIgnoreProperties("conges")
+    private Employe employe;
 
 }
