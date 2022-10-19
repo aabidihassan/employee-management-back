@@ -29,6 +29,8 @@ public class Conge {
      * 
      */
 	@Id
+	private long id_conge;
+	
 	private int annee;
 
     /**
