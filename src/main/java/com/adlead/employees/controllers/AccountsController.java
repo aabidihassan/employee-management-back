@@ -33,7 +33,6 @@ public class AccountsController {
     }
 
     @GetMapping(path = "/profile")
-    @PostAuthorize("hasAnyAuthority('ADMIN', 'USER')")
     public Utilisateur profile(Principal principal){
         return utilisateurService.loadUserByUsername(principal.getName());
     }

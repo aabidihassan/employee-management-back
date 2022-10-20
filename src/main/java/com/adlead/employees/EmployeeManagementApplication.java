@@ -77,9 +77,15 @@ public class EmployeeManagementApplication {
 	         .apis(RequestHandlerSelectors.basePackage("com.adlead.employees.controllers")).build();
 	   }
 	
-//	@Bean
-//  CommandLineRunner start(AccountServiceImpl accountService, AppRoleService appRoleService, UtilisateurService utilisateurService, ServiceService serviceService){
-//      return args -> {
+	@Bean
+  CommandLineRunner start(AnneeRepo anneeRepo, EmployeRepo employeRepo, CongeService congeService ,AccountServiceImpl accountService, AppRoleService appRoleService, UtilisateurService utilisateurService, ServiceService serviceService){
+      return args -> {
+//    	  Annee annee1 = anneeRepo.save(new Annee(2021));
+//    	  Annee annee2 = anneeRepo.save(new Annee(2022));
+//    	  employeRepo.findAllEmployesByActive(true).forEach(emp->{
+//    		  congeService.save(new Conge(0, annee1, 22, null, emp));
+//    		  congeService.save(new Conge(0, annee2, 22, null, emp));
+//    	  });
 //          appRoleService.addNewRole(new AppRole("ADMIN"));
 //          appRoleService.addNewRole(new AppRole("SUPERUSER"));
 //          appRoleService.addNewRole(new AppRole("USER"));
@@ -95,7 +101,7 @@ public class EmployeeManagementApplication {
 //          accountService.affectRoleToUser("admin", "ADMIN");
 ////          accountService.affectRoleToUser("super", "SUPERUSER");
 ////          accountService.affectRoleToUser("user", "USER");
-//      };
-//  }
+      };
+  }
 
 }
