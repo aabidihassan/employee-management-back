@@ -1,23 +1,35 @@
 package com.adlead.employees;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
+import com.adlead.employees.models.Annee;
 import com.adlead.employees.models.AppRole;
+import com.adlead.employees.models.Conge;
 import com.adlead.employees.models.Employe;
 import com.adlead.employees.models.Employe_Creation;
 import com.adlead.employees.models.Service;
 import com.adlead.employees.models.Statut;
 import com.adlead.employees.models.Utilisateur;
+import com.adlead.employees.repositories.AnneeRepo;
+import com.adlead.employees.repositories.EmployeRepo;
 import com.adlead.employees.services.AccountServiceImpl;
 import com.adlead.employees.services.AppRoleService;
+import com.adlead.employees.services.CongeService;
+import com.adlead.employees.services.EmployeService;
 import com.adlead.employees.services.ServiceService;
 import com.adlead.employees.services.UtilisateurService;
 
@@ -28,8 +40,19 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
 @EnableSwagger2
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 @CrossOrigin("*")
+@EnableScheduling
 public class EmployeeManagementApplication {
+	
+	@Autowired
+	private AnneeRepo anneeRepo;
+	
+	@Autowired
+	private CongeService congeService;
+	
+	@Autowired
+	private EmployeRepo employeRepo;
 
 	public static void main(String[] args) {
 		SpringApplication.run(EmployeeManagementApplication.class, args);
@@ -39,6 +62,14 @@ public class EmployeeManagementApplication {
     PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
+	
+	 @Scheduled(cron = "0 1 0 1 1 *")
+	 public void task() {
+	     Annee anne = this.anneeRepo.save(new Annee(Calendar.getInstance().get(Calendar.YEAR)));
+	     this.employeRepo.findAllEmployesByActive(true).forEach(employe->{
+	    	 this.congeService.save(new Conge(0, anne, 22, null, employe));
+	     });
+	 }
 	
 	@Bean
 	public Docket productApi() {
