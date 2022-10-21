@@ -20,12 +20,15 @@ public class CongeService {
 	}
 	
 	public List<Conge> getAllByAnnee(int annee){
-		if(annee == 0) return this.congeRepo.findAll();
 		return this.congeRepo.findAllCongesByAnnee(new Annee(annee));
 	}
 	
 	public Conge save(Conge conge) {
 		return this.congeRepo.save(conge);
+	}
+	
+	public Conge getById(long id) {
+		return this.congeRepo.findById(id).get();
 	}
 
 }

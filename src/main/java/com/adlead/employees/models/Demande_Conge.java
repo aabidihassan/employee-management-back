@@ -1,6 +1,7 @@
 package com.adlead.employees.models;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -37,10 +38,10 @@ public class Demande_Conge {
     
     private int nb_jour;
     
-    @ManyToOne @JsonIgnoreProperties("demandes")
+    @ManyToOne(fetch = FetchType.EAGER) @JsonIgnoreProperties("demandes")
     private Conge conge;
     
-    @ManyToOne @JsonIgnoreProperties("demandes")
+    @ManyToOne(fetch = FetchType.EAGER) @JsonIgnoreProperties("demandes")
     private Etat_Conge etat;
 
 }
