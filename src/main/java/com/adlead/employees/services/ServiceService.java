@@ -1,10 +1,12 @@
 package com.adlead.employees.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.adlead.employees.models.Employe;
 import com.adlead.employees.repositories.ServiceRepo;
 
 @Service
@@ -31,6 +33,14 @@ public class ServiceService {
 	
 	public void delete(long id) {
 		this.serviceRepo.deleteById(id);
+	}
+	
+	public List<Employe> getEmployesByService(long id){
+		List<Employe> list = new ArrayList<Employe>();
+		this.findById(id).getFonctions().forEach(fonction->{
+			list.addAll(fonction.getEmployes());
+		});
+		return list;
 	}
 	
 	public com.adlead.employees.models.Service edit(com.adlead.employees.models.Service service){

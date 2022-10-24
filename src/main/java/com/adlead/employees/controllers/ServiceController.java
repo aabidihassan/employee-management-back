@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.adlead.employees.models.Employe;
 import com.adlead.employees.models.Service;
 import com.adlead.employees.services.ServiceService;
 
@@ -33,6 +34,12 @@ public class ServiceController {
 	@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('SUPERUSER')")
 	public List<Service> getAll() {
 		return this.serviceService.getAll();
+	}
+	
+	@GetMapping("/service/{id}")
+	@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('SUPERUSER')")
+	public List<Employe> getEmployesByService(@PathVariable(name = "id") long id) {
+		return this.serviceService.getEmployesByService(id);
 	}
 	
 	@PostMapping("/")
