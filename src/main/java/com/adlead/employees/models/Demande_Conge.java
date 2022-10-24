@@ -38,6 +38,9 @@ public class Demande_Conge {
     
     private int nb_jour;
     
+    @ManyToOne
+    private Employe adjoint;
+    
     @ManyToOne(fetch = FetchType.EAGER) @JsonIgnoreProperties("demandes")
     private Conge conge;
     
