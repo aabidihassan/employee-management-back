@@ -130,5 +130,9 @@ public class Employe {
     @OneToMany(mappedBy = "employe") @JsonIgnoreProperties("employe")
     @Cascade(CascadeType.ALL)
     private List<Champs_CV> champs = new ArrayList<Champs_CV>();
+    
+    @OneToMany(mappedBy = "employe", fetch = FetchType.EAGER) 
+    @Fetch(FetchMode.SUBSELECT)
+    private List<Avertissement> avertissements = new ArrayList<Avertissement>();
 
 }
