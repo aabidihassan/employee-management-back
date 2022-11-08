@@ -20,6 +20,7 @@ public class AvertissementService {
 	}
 	
 	public Avertissement save(Avertissement avertissement) {
+		System.out.println(avertissement.getCause());
 		return this.avertissementRepo.save(avertissement);
 	}
 	
@@ -29,6 +30,10 @@ public class AvertissementService {
 				rechercheAvertissement.getEmploye()) 
 				: this.avertissementRepo.findAllAvertissementsByDate(rechercheAvertissement.getDe(), 
 						rechercheAvertissement.getJusqua());
+	}
+	
+	public void delete(long id) {
+		this.avertissementRepo.deleteById(id);
 	}
 
 }

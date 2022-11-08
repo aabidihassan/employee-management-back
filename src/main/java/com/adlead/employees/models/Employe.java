@@ -18,6 +18,7 @@ import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
@@ -132,7 +133,7 @@ public class Employe {
     private List<Champs_CV> champs = new ArrayList<Champs_CV>();
     
     @OneToMany(mappedBy = "employe", fetch = FetchType.EAGER) 
-    @Fetch(FetchMode.SUBSELECT)
+    @Fetch(FetchMode.SUBSELECT) @JsonIgnore
     private List<Avertissement> avertissements = new ArrayList<Avertissement>();
 
 }

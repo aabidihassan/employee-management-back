@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.adlead.employees.models.Champs_CV;
-import com.adlead.employees.models.Employe;
 import com.adlead.employees.services.Champs_CVService;
 import com.adlead.employees.services.UtilisateurService;
 
