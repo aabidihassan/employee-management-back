@@ -20,7 +20,6 @@ public class AvertissementService {
 	}
 	
 	public Avertissement save(Avertissement avertissement) {
-		System.out.println(avertissement.getCause());
 		return this.avertissementRepo.save(avertissement);
 	}
 	

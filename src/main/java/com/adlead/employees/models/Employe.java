@@ -135,5 +135,9 @@ public class Employe {
     @OneToMany(mappedBy = "employe", fetch = FetchType.EAGER) 
     @Fetch(FetchMode.SUBSELECT) @JsonIgnore
     private List<Avertissement> avertissements = new ArrayList<Avertissement>();
+    
+    @OneToMany(mappedBy = "employe", fetch = FetchType.EAGER) 
+    @Fetch(FetchMode.SUBSELECT) @JsonIgnore
+    private List<Observation> observations = new ArrayList<Observation>();
 
 }
