@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,6 +42,12 @@ public class SanctionToEmployeController {
     @PostAuthorize("hasAnyAuthority('ADMIN', 'SUPERUSER')")
     public List<SanctionToEmploye> findByCritiques(@RequestBody RechercheAvertissement rechercheAvertissement){
         return this.sanctionToEmployeService.getSanctionsByCritiques(rechercheAvertissement);
+    }
+	
+	@GetMapping("/{id}")
+    @PostAuthorize("hasAnyAuthority('ADMIN', 'SUPERUSER')")
+    public void delete(@PathVariable(name = "id") long id){
+        this.sanctionToEmployeService.delete(id);
     }
 
 }
