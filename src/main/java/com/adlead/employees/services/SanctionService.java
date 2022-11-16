@@ -25,5 +25,9 @@ public class SanctionService {
 	public List<Sanction> getAll(){
 		return this.sanctionRepo.findAll();
 	}
+	
+	public void delete(long id) {
+		this.sanctionRepo.deleteById(id);
+	}
 
 }
