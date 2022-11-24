@@ -143,5 +143,9 @@ public class Employe {
     @OneToMany(mappedBy = "employe" ,fetch = FetchType.EAGER) 
     @Fetch(FetchMode.SUBSELECT) @JsonIgnore
     private List<SanctionToEmploye> sanctions = new ArrayList<SanctionToEmploye>();
+    
+    @OneToMany(mappedBy = "employe", fetch = FetchType.EAGER) 
+    @Fetch(FetchMode.SUBSELECT) @JsonIgnore
+    private List<MiseAPied> miseapieds = new ArrayList<MiseAPied>();
 
 }
