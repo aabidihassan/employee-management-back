@@ -15,16 +15,20 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Data @NoArgsConstructor @AllArgsConstructor
-public class MiseAPied {
+public class Reponse {
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id_miseapied;
+	private long id_reponse;
 	
-	private String date;
-	private String description;
-	private int nb_jours;
+	private boolean reponse;
 	
-	@ManyToOne(fetch = FetchType.EAGER) @JsonIgnoreProperties("misesapieds")
+	@ManyToOne
+	private Enquette enquette;
+	
+	@ManyToOne
 	private Employe employe;
+	
+	@ManyToOne(fetch = FetchType.EAGER) @JsonIgnoreProperties("reponses")
+	private Question question;
 
 }
