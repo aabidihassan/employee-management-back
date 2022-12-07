@@ -29,12 +29,8 @@ public class Question {
 	
 	private String question;
 	
-	@OneToMany(mappedBy = "question", fetch = FetchType.EAGER)
+	@OneToMany(fetch = FetchType.EAGER)
 	@Fetch(FetchMode.SUBSELECT)
 	private List<Reponse> reponses = new ArrayList<Reponse>();
-	
-	@ManyToMany(fetch = FetchType.EAGER)
-	@Fetch(FetchMode.SUBSELECT) @JsonIgnore
-	private List<Enquette> enquettes = new ArrayList<Enquette>();
 
 }

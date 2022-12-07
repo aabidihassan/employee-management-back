@@ -10,9 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,8 +21,9 @@ public class Enquette {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id_enquette;
 	
-	@ManyToMany(mappedBy = "enquettes", fetch = FetchType.EAGER)
-	@Fetch(FetchMode.SUBSELECT)
+	private String nom;
+	
+	@ManyToMany
 	private List<Question> questions = new ArrayList<Question>();
 	
 }
