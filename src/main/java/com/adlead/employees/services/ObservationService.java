@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.adlead.employees.dto.RechercheAvertissement;
+import com.adlead.employees.dto.RechercheDto;
 import com.adlead.employees.models.Observation;
 import com.adlead.employees.repositories.ObservationRepo;
 
@@ -23,7 +23,7 @@ public class ObservationService {
 		return this.observationRepo.save(observation);
 	}
 	
-	public List<Observation> getObservationByCritiques(RechercheAvertissement rechercheAvertissement){
+	public List<Observation> getObservationByCritiques(RechercheDto rechercheAvertissement){
 		return rechercheAvertissement.getEmploye() !=null ? this.observationRepo.findAllObservationsByDateAndEmploye(
 				rechercheAvertissement.getDe(), rechercheAvertissement.getJusqua(), 
 				rechercheAvertissement.getEmploye()) 

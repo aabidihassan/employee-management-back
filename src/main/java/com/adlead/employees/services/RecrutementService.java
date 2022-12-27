@@ -5,21 +5,21 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.adlead.employees.dto.RechercheDto;
 import com.adlead.employees.models.Recrutement;
+import com.adlead.employees.repositories.EmployeRepo;
 import com.adlead.employees.repositories.RecrutementRepo;
 
 @Service
 public class RecrutementService {
 	
 	private RecrutementRepo recrutementRepo;
+	private EmployeRepo employeRepo;
 	
 	@Autowired
-	public RecrutementService(RecrutementRepo recrutementRepo) {
+	public RecrutementService(RecrutementRepo recrutementRepo, EmployeRepo employeRepo) {
 		this.recrutementRepo = recrutementRepo;
-	}
-	
-	public List<Recrutement> getAll(){
-		return this.recrutementRepo.findAll();
+		this.employeRepo = employeRepo;
 	}
 	
 	public Recrutement save(Recrutement recrutement) {
@@ -30,10 +30,30 @@ public class RecrutementService {
 		return this.recrutementRepo.findById(id).get();
 	}
 	
-	public Recrutement changeStatut(long id, boolean statut) {
+	public Recrutement accept(long id) {
 		Recrutement recrutement = this.findById(id);
-		recrutement.setStatut(statut);
+		recrutement.setStatut(true);
+		recrutement.getDemendeur().setFonction(recrutement.getFonction());
+		this.employeRepo.save(recrutement.getDemendeur());
 		return this.save(recrutement);
+	}
+	
+	public Recrutement decline(long id) {
+		Recrutement recrutement = this.findById(id);
+		recrutement.setStatut(false);
+		return this.save(recrutement);
+	}
+	
+	public void delete(long id) {
+		this.recrutementRepo.deleteById(id);
+	}
+	
+	public List<Recrutement> getRecrutementsByCritiques(RechercheDto rechercheAvertissement){
+		return rechercheAvertissement.getEmploye() !=null ? this.recrutementRepo.findAllRecrutementsByDateAndDemandeur(
+				rechercheAvertissement.getDe(), rechercheAvertissement.getJusqua(), 
+				rechercheAvertissement.getEmploye()) 
+				: this.recrutementRepo.findAllRecrutementsByDate(rechercheAvertissement.getDe(), 
+						rechercheAvertissement.getJusqua());
 	}
 
 }

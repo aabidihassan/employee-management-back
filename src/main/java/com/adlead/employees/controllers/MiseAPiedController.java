@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.adlead.employees.dto.RechercheAvertissement;
+import com.adlead.employees.dto.RechercheDto;
 import com.adlead.employees.models.MiseAPied;
 import com.adlead.employees.services.MiseAPiedService;
 
@@ -34,7 +34,7 @@ public class MiseAPiedController {
 	
 	@PostMapping("/search")
     @PostAuthorize("hasAnyAuthority('ADMIN', 'SUPERUSER')")
-    public List<MiseAPied> findByCritiques(@RequestBody RechercheAvertissement rechercheAvertissement){
+    public List<MiseAPied> findByCritiques(@RequestBody RechercheDto rechercheAvertissement){
         return this.miseAPiedService.getMiseAPiedByCritiques(rechercheAvertissement);
     }
 	

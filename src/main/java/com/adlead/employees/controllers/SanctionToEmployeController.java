@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.adlead.employees.dto.RechercheAvertissement;
+import com.adlead.employees.dto.RechercheDto;
 import com.adlead.employees.models.SanctionToEmploye;
 import com.adlead.employees.services.SanctionToEmployeService;
 
@@ -40,7 +40,7 @@ public class SanctionToEmployeController {
 	
 	@PostMapping("/search")
     @PostAuthorize("hasAnyAuthority('ADMIN', 'SUPERUSER')")
-    public List<SanctionToEmploye> findByCritiques(@RequestBody RechercheAvertissement rechercheAvertissement){
+    public List<SanctionToEmploye> findByCritiques(@RequestBody RechercheDto rechercheAvertissement){
         return this.sanctionToEmployeService.getSanctionsByCritiques(rechercheAvertissement);
     }
 	

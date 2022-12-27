@@ -6,10 +6,13 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,7 +27,7 @@ public class Recrutement {
 	
 	private String date;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER) @JsonIgnoreProperties("recrutements")
 	private Employe demendeur;
 	
 	@ManyToOne
@@ -35,7 +38,7 @@ public class Recrutement {
 	@Column(nullable = true)
 	private boolean statut;
 	
-	private String qualfication;
+	private String qualification;
 	
 	@ElementCollection(targetClass=String.class)
 	private List<String> exigences = new ArrayList<String>();

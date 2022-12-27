@@ -7,7 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor @AllArgsConstructor
-public class RechercheAvertissement {
+public class RechercheDto {
 	
 	private String de;
 	private String jusqua;

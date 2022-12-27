@@ -118,9 +118,6 @@ public class Employe {
     @Cascade(CascadeType.ALL)
     private Employe_Edit modification = new Employe_Edit();
     
-    @OneToMany(mappedBy = "employe") @JsonIgnoreProperties("employe")
-    private List<Contrat> contrats = new ArrayList<Contrat>();
-    
     @OneToMany(mappedBy = "employe", fetch = FetchType.EAGER)
     @Fetch(FetchMode.SUBSELECT)
     private List<Conge> conges = new ArrayList<Conge>();
@@ -147,5 +144,8 @@ public class Employe {
     @OneToMany(mappedBy = "employe", fetch = FetchType.EAGER) 
     @Fetch(FetchMode.SUBSELECT) @JsonIgnore
     private List<MiseAPied> miseapieds = new ArrayList<MiseAPied>();
+    
+    @OneToMany(mappedBy = "demendeur", fetch = FetchType.LAZY) @JsonIgnore
+    private List<Recrutement> recrutements = new ArrayList<Recrutement>();
 
 }

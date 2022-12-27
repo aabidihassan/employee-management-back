@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.adlead.employees.dto.RechercheDto;
 import com.adlead.employees.models.Recrutement;
 import com.adlead.employees.services.RecrutementService;
 
@@ -25,11 +26,11 @@ public class RecrutementController {
 		this.recrutementService = recrutementService;
 	}
 	
-	@GetMapping("/")
+	@PostMapping("/search")
 	@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('SUPERUSER')")
-	public List<Recrutement> findAll(){
-		return this.recrutementService.getAll();
-	}
+	public List<Recrutement> findByCritiques(@RequestBody RechercheDto rechercheAvertissement){
+        return this.recrutementService.getRecrutementsByCritiques(rechercheAvertissement);
+    }
 	
 	@PostMapping("/")
 	@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('SUPERUSER')")
@@ -39,14 +40,20 @@ public class RecrutementController {
 	
 	@GetMapping("/{id}")
 	@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('SUPERUSER')")
-	public Recrutement findById(@PathVariable(name = "id") long id) {
-		return this.recrutementService.findById(id);
+	public void delete(@PathVariable(name = "id") long id) {
+		this.recrutementService.delete(id);
 	}
 	
-	@GetMapping("/{id}/{statut}")
+	@GetMapping("/accept/{id}")
 	@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('SUPERUSER')")
-	public Recrutement changeStatut(@PathVariable(name = "id") long id, @PathVariable(name = "statut") boolean statut) {
-		return this.recrutementService.changeStatut(id, statut);
+	public Recrutement accept(@PathVariable(name = "id") long id) {
+		return this.recrutementService.accept(id);
+	}
+	
+	@GetMapping("/decline/{id}")
+	@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('SUPERUSER')")
+	public Recrutement decline(@PathVariable(name = "id") long id) {
+		return this.recrutementService.decline(id);
 	}
 
 }

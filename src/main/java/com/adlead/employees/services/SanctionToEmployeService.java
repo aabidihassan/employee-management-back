@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.adlead.employees.dto.RechercheAvertissement;
+import com.adlead.employees.dto.RechercheDto;
 import com.adlead.employees.models.SanctionToEmploye;
 import com.adlead.employees.repositories.SanctionToEmployeRepo;
 
@@ -31,7 +31,7 @@ public class SanctionToEmployeService {
 		this.sanctionToEmployeRepo.deleteById(id);
 	}
 	
-	public List<SanctionToEmploye> getSanctionsByCritiques(RechercheAvertissement rechercheAvertissement){
+	public List<SanctionToEmploye> getSanctionsByCritiques(RechercheDto rechercheAvertissement){
 		return rechercheAvertissement.getEmploye() !=null ? this.sanctionToEmployeRepo.findAllSanctionToEmployesByDateAndEmploye(
 				rechercheAvertissement.getDe(), rechercheAvertissement.getJusqua(), 
 				rechercheAvertissement.getEmploye()) 

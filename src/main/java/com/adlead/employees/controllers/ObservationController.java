@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.adlead.employees.dto.RechercheAvertissement;
+import com.adlead.employees.dto.RechercheDto;
 import com.adlead.employees.models.Observation;
 import com.adlead.employees.services.ObservationService;
 
@@ -34,7 +34,7 @@ public class ObservationController {
 	
 	@PostMapping("/search")
     @PostAuthorize("hasAnyAuthority('ADMIN', 'SUPERUSER')")
-    public List<Observation> findByCritiques(@RequestBody RechercheAvertissement rechercheAvertissement){
+    public List<Observation> findByCritiques(@RequestBody RechercheDto rechercheAvertissement){
         return this.observationService.getObservationByCritiques(rechercheAvertissement);
     }
 	
